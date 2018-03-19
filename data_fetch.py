@@ -46,6 +46,7 @@ def RMExposureDayGet(secID, ticker, tradeDate, beginDate, endDate, field=FACTOR_
     
 
     if tradeDate:
+        tradeDate = pd.core.tools.datetimes.to_datetime(tradeDate).strftime(FORMAT)
         barra_factor = pd.read_hdf(os.path.join(BARRA_PATH, '.'.join(tradeDate, 'h5')), 'table')[field]
         if secid:
             return barra_factor.loc[secid, :].dropna()
